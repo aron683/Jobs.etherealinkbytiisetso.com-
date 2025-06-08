@@ -7,7 +7,7 @@
   <meta name="author" content="Tiisetso Mofokeng" />
   <meta name="keywords" content="JobSniper, job search, premium jobs, career, employment, South Africa, apply now, Tiisetso" />
 
-  <!-- 🌐 Open Graph (for WhatsApp/Facebook previews) -->
+  <!-- 🌐 Open Graph -->
   <meta property="og:title" content="JobSniper X" />
   <meta property="og:description" content="Find premium jobs with one click. Built for fast hustlers. 🔥" />
   <meta property="og:image" content="https://i.imgur.com/Mj79Kgw.png" />
@@ -18,75 +18,65 @@
   <link rel="icon" href="https://i.imgur.com/Mj79Kgw.png" />
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #333;
-      text-align: center;
     }
     header {
       background: #004d40;
       color: white;
       padding: 20px;
+      text-align: center;
     }
     .logo {
       height: 60px;
       margin-bottom: 10px;
     }
-    h1 {
-      margin: 10px 0 5px;
-    }
     .search-bar {
-      margin: 20px auto;
       display: flex;
       justify-content: center;
-      max-width: 600px;
+      margin: 20px;
     }
     .search-bar input {
       padding: 10px;
-      width: 70%;
+      width: 60%;
+      border-radius: 5px 0 0 5px;
       border: 1px solid #ccc;
-      border-radius: 6px 0 0 6px;
-      outline: none;
     }
     .search-bar button {
       padding: 10px 20px;
-      border: none;
       background: #009688;
       color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
       cursor: pointer;
-      border-radius: 0 6px 6px 0;
-    }
-    .jobs {
-      padding: 20px;
     }
     .job-card {
       background: white;
-      border: 1px solid #ddd;
-      margin: 10px auto;
-      padding: 15px;
+      margin: 20px auto;
+      padding: 20px;
       max-width: 600px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .job-card h3 {
       margin: 0;
       color: #00796b;
     }
     .job-card p {
-      margin: 5px 0 10px;
+      margin: 5px 0;
     }
     .job-card button {
       padding: 8px 15px;
       border: none;
       background: #00796b;
       color: white;
-      border-radius: 6px;
-      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
     }
     footer {
-      margin-top: 40px;
+      text-align: center;
       padding: 20px;
       background: #e0e0e0;
       font-size: 14px;
@@ -101,40 +91,58 @@
   </header>
 
   <div class="search-bar">
-    <input type="text" id="jobSearch" placeholder="Search for jobs..." />
-    <button onclick="searchJobs()">Search</button>
+    <input type="text" id="searchInput" placeholder="Search job title like developer, designer, security..." />
+    <button onclick="fetchJobs()">Search</button>
   </div>
 
-  <div class="jobs" id="jobList">
-    <div class="job-card">
-      <h3>Graphic Designer - Remote</h3>
-      <p>R25,000/month - Start immediately</p>
-      <button>Apply Now</button>
-    </div>
-    <div class="job-card">
-      <h3>Social Media Manager</h3>
-      <p>R20,000/month - Work from home</p>
-      <button>Apply Now</button>
-    </div>
-    <div class="job-card">
-      <h3>Sales Assistant - Cape Town</h3>
-      <p>R12,500/month - Retail sector</p>
-      <button>Apply Now</button>
-    </div>
-  </div>
+  <div id="results"></div>
 
   <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X
   </footer>
 
   <script>
-    function searchJobs() {
-      const input = document.getElementById("jobSearch").value.toLowerCase();
-      const cards = document.querySelectorAll(".job-card");
-      cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
-      });
+    async function fetchJobs() {
+      const searchTerm = document.getElementById('searchInput').value;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '<p>Loading jobs...</p>';
+
+      const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(searchTerm)}&page=1&num_pages=1`;
+
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': 'be05ad0d85mshe8a36833da7731ep19fffbjsne1c412115bbc',
+          'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+        }
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        resultsDiv.innerHTML = '';
+        if (data.data.length === 0) {
+          resultsDiv.innerHTML = '<p>No jobs found. Try another keyword.</p>';
+          return;
+        }
+        data.data.forEach(job => {
+          const card = document.createElement('div');
+          card.className = 'job-card';
+          card.innerHTML = `
+            <h3>${job.job_title}</h3>
+            <p><strong>Company:</strong> ${job.employer_name}</p>
+            <p><strong>Location:</strong> ${job.job_city}, ${job.job_country}</p>
+            <p>${job.job_description.substring(0, 180)}...</p>
+            <a href="${job.job_apply_link}" target="_blank">
+              <button>Apply Now</button>
+            </a>
+          `;
+          resultsDiv.appendChild(card);
+        });
+      } catch (error) {
+        resultsDiv.innerHTML = '<p>Error loading jobs. Please try again later.</p>';
+      }
     }
   </script>
 </body>
-</html>
+      </html>
