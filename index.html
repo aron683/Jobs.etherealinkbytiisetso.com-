@@ -22,6 +22,27 @@
     h1 {
       color: #22d3ee;
     }
+    .search-bar {
+      margin: 1rem auto;
+      max-width: 400px;
+      display: flex;
+      justify-content: center;
+    }
+    .search-bar input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 5px 0 0 5px;
+      border: none;
+      width: 70%;
+    }
+    .search-bar button {
+      padding: 0.5rem 1rem;
+      background: #22d3ee;
+      color: black;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
     .job-card {
       background: #1e293b;
       margin: 1rem auto;
@@ -34,7 +55,7 @@
     .job-card h2 {
       color: #38bdf8;
     }
-    button {
+    button.apply {
       background: #22d3ee;
       color: black;
       border: none;
@@ -50,31 +71,40 @@
       margin-top: 2rem;
       color: #94a3b8;
     }
+    img.logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://i.imgur.com/UcJm90G.png" alt="JobSniper X Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://i.imgur.com/Mj79Kgw.png" alt="JobSniper Logo" class="logo" />
     <h1>JobSniper X</h1>
     <p>Sniping the best jobs for you – fast and smart</p>
   </header>
 
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search job title...">
+    <button onclick="searchJobs()">Search</button>
+  </div>
+
   <section class="job-card">
     <h2>Software Developer – Remote</h2>
     <p>Work from home with a leading fintech company. Apply now!</p>
-    <button onclick="alert('Premium required to apply!')">Apply Now</button>
+    <button class="apply" onclick="alert('Premium required to apply!')">Apply Now</button>
   </section>
 
   <section class="job-card">
     <h2>Graphic Designer – Cape Town</h2>
     <p>Join a creative team and grow your design career in SA!</p>
-    <button onclick="alert('Premium required to apply!')">Apply Now</button>
+    <button class="apply" onclick="alert('Premium required to apply!')">Apply Now</button>
   </section>
 
   <section class="job-card">
     <h2>Data Analyst – Johannesburg</h2>
     <p>Analyze data for big brands and build your future in data science.</p>
-    <button onclick="alert('Premium required to apply!')">Apply Now</button>
+    <button class="apply" onclick="alert('Premium required to apply!')">Apply Now</button>
   </section>
 
   <div class="premium">
@@ -84,5 +114,16 @@
   <footer>
     <p>Powered by Tiisetso • JobSniper X 2025</p>
   </footer>
+
+  <script>
+    function searchJobs() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".job-card");
+      cards.forEach(card => {
+        const title = card.querySelector("h2").innerText.toLowerCase();
+        card.style.display = title.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
 </body>
-  </html>
+    </html>
