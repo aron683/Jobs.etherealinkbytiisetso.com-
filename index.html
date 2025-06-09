@@ -108,14 +108,24 @@
     <button onclick="fetchJobs()">Search</button>
   </div>
 
+  <!-- 🔓 Unlock Premium Link Below Search -->
+  <div style="text-align:center; margin: 10px;">
+    <a href="https://tpi.li/6Pp" target="_blank" style="background:#00796b; color:white; padding:12px 18px; text-decoration:none; border-radius:6px; font-weight:bold;">
+      🔐 Unlock Verified Jobs Database – Tap Here
+    </a>
+  </div>
+
   <div id="results"></div>
 
   <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X
   </footer>
 
+  <!-- 💼 Persistent Link in Footer -->
   <div class="referral-link">
-    <a href="https://tpi.li/6Pp" target="_blank">💸 Support or Earn with JobSniper — Tap Here</a>
+    <a href="https://tpi.li/6Pp" target="_blank">
+      💼 Access Exclusive Jobs Only Shared by Recruiters – Click Here
+    </a>
   </div>
 
   <script>
@@ -138,10 +148,12 @@
         const response = await fetch(url, options);
         const data = await response.json();
         resultsDiv.innerHTML = '';
+
         if (data.data.length === 0) {
           resultsDiv.innerHTML = '<p>No jobs found. Try another keyword.</p>';
           return;
         }
+
         data.data.forEach(job => {
           const card = document.createElement('div');
           card.className = 'job-card';
@@ -156,9 +168,26 @@
           `;
           resultsDiv.appendChild(card);
         });
+
+        // 🔥 Insert fake premium jobs CTA
+        addSecretLink();
+
       } catch (error) {
         resultsDiv.innerHTML = '<p>Error loading jobs. Please try again later.</p>';
       }
+    }
+
+    function addSecretLink() {
+      const resultsDiv = document.getElementById('results');
+      const secret = document.createElement('div');
+      secret.style.textAlign = 'center';
+      secret.style.margin = '30px 10px';
+      secret.innerHTML = `
+        <a href="https://tpi.li/6Pp" target="_blank" style="background:#e91e63; color:white; padding:12px 18px; text-decoration:none; border-radius:6px; font-weight:bold;">
+          🚨 Hidden Premium Jobs List Unlocked – Tap Here to Access
+        </a>
+      `;
+      resultsDiv.appendChild(secret);
     }
 
     // Load default jobs
@@ -167,4 +196,4 @@
     };
   </script>
 </body>
-      </html>
+</html>
