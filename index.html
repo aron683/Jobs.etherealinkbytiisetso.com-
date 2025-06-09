@@ -14,6 +14,10 @@
   <meta property="og:url" content="https://job.etherealinkbytiisetso.com" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- ✅ Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2681951363211497"
+     crossorigin="anonymous"></script>
+
   <title>JobSniper X</title>
   <link rel="icon" href="logo.png" />
   <style>
@@ -75,15 +79,9 @@
       border-radius: 5px;
       margin-top: 10px;
     }
-    footer {
+    .ads-container, .referral-link {
       text-align: center;
-      padding: 20px;
-      background: #e0e0e0;
-      font-size: 14px;
-    }
-    .referral-link {
-      text-align: center;
-      margin: 20px;
+      margin: 20px auto;
     }
     .referral-link a {
       background: #009688;
@@ -94,6 +92,12 @@
       font-weight: bold;
       display: inline-block;
     }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e0e0e0;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -103,28 +107,43 @@
     <p>Sniping premium jobs for you – fast and smart</p>
   </header>
 
+  <!-- 🔍 Search Section -->
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="Search job title like developer, designer, security..." />
     <button onclick="fetchJobs()">Search</button>
   </div>
 
-  <!-- 🔓 Unlock Premium Link Below Search -->
-  <div style="text-align:center; margin: 10px;">
-    <a href="https://tpi.li/6Pp" target="_blank" style="background:#00796b; color:white; padding:12px 18px; text-decoration:none; border-radius:6px; font-weight:bold;">
-      🔐 Unlock Verified Jobs Database – Tap Here
+  <!-- 💸 Monetized ShrinkMe CTA -->
+  <div class="referral-link">
+    <a href="https://tpi.li/6Pp" target="_blank">
+      🚀 Unlock Hidden Jobs Database – Tap Here
     </a>
   </div>
 
+  <!-- 📢 Google AdSense Banner Ad -->
+  <div class="ads-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2681951363211497"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- 🔽 Job Results -->
   <div id="results"></div>
 
   <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X
   </footer>
 
-  <!-- 💼 Persistent Link in Footer -->
+  <!-- 🔗 Final ShrinkMe Link -->
   <div class="referral-link">
     <a href="https://tpi.li/6Pp" target="_blank">
-      💼 Access Exclusive Jobs Only Shared by Recruiters – Click Here
+      💼 Premium Job Leads Shared by Recruiters – Click to Access
     </a>
   </div>
 
@@ -169,31 +188,21 @@
           resultsDiv.appendChild(card);
         });
 
-        // 🔥 Insert fake premium jobs CTA
-        addSecretLink();
+        // 👇 Add extra CTA after results
+        const more = document.createElement('div');
+        more.className = "referral-link";
+        more.innerHTML = `<a href="https://tpi.li/6Pp" target="_blank">🔥 Get the Secret Job List – Tap to View</a>`;
+        resultsDiv.appendChild(more);
 
       } catch (error) {
         resultsDiv.innerHTML = '<p>Error loading jobs. Please try again later.</p>';
       }
     }
 
-    function addSecretLink() {
-      const resultsDiv = document.getElementById('results');
-      const secret = document.createElement('div');
-      secret.style.textAlign = 'center';
-      secret.style.margin = '30px 10px';
-      secret.innerHTML = `
-        <a href="https://tpi.li/6Pp" target="_blank" style="background:#e91e63; color:white; padding:12px 18px; text-decoration:none; border-radius:6px; font-weight:bold;">
-          🚨 Hidden Premium Jobs List Unlocked – Tap Here to Access
-        </a>
-      `;
-      resultsDiv.appendChild(secret);
-    }
-
-    // Load default jobs
+    // Auto load with "developer" jobs on open
     window.onload = () => {
       fetchJobs('developer');
     };
   </script>
 </body>
-</html>
+  </html>
