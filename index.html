@@ -6,28 +6,94 @@
   <meta name="description" content="JobSniper X - Find high-paying jobs instantly. Built for fast, smart hustlers by Tiisetso.">
   <meta name="author" content="Tiisetso Mofokeng" />
   <meta name="keywords" content="JobSniper, job search, premium jobs, career, employment, South Africa, apply now, Tiisetso" />
+
+  <!-- 🌐 Open Graph -->
   <meta property="og:title" content="JobSniper X" />
   <meta property="og:description" content="Find premium jobs with one click. Built for fast hustlers. 🔥" />
   <meta property="og:image" content="logo.png" />
   <meta property="og:url" content="https://job.etherealinkbytiisetso.com" />
   <meta name="twitter:card" content="summary_large_image" />
+
   <title>JobSniper X</title>
   <link rel="icon" href="logo.png" />
-  <script src="https://js.paystack.co/v1/inline.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-    header { background: #004d40; color: white; padding: 20px; text-align: center; }
-    .logo { height: 60px; margin-bottom: 10px; }
-    .search-bar { display: flex; justify-content: center; margin: 20px; }
-    .search-bar input { padding: 10px; width: 60%; border-radius: 5px 0 0 5px; border: 1px solid #ccc; }
-    .search-bar button { padding: 10px 20px; background: #009688; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
-    .job-card { background: white; margin: 20px auto; padding: 20px; max-width: 600px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .job-card h3 { margin: 0; color: #00796b; }
-    .job-card p { margin: 5px 0; }
-    .job-card button { padding: 8px 15px; border: none; background: #00796b; color: white; border-radius: 5px; margin-top: 10px; }
-    footer { text-align: center; padding: 20px; background: #e0e0e0; font-size: 14px; }
-    #lock { display: none; text-align: center; padding: 30px; }
-    #lock h2 { color: red; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #004d40;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
+    .search-bar input {
+      padding: 10px;
+      width: 60%;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #ccc;
+    }
+    .search-bar button {
+      padding: 10px 20px;
+      background: #009688;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    .job-card {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .job-card h3 {
+      margin: 0;
+      color: #00796b;
+    }
+    .job-card p {
+      margin: 5px 0;
+    }
+    .job-card button {
+      padding: 8px 15px;
+      border: none;
+      background: #00796b;
+      color: white;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e0e0e0;
+      font-size: 14px;
+    }
+    .referral-link {
+      text-align: center;
+      margin: 20px;
+    }
+    .referral-link a {
+      background: #009688;
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -37,40 +103,29 @@
     <p>Sniping premium jobs for you – fast and smart</p>
   </header>
 
-  <div class="search-bar" id="search-bar">
+  <div class="search-bar">
     <input type="text" id="searchInput" placeholder="Search job title like developer, designer, security..." />
     <button onclick="fetchJobs()">Search</button>
   </div>
 
   <div id="results"></div>
 
-  <div id="lock">
-    <h2>⏳ Your free access has ended</h2>
-    <p>Unlock premium for R350 to continue searching jobs.</p>
-    <button onclick="payWithPaystack()">Unlock Now</button>
-  </div>
-
   <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X
   </footer>
 
+  <div class="referral-link">
+    <a href="https://tpi.li/6Pp" target="_blank">💸 Support or Earn with JobSniper — Tap Here</a>
+  </div>
+
   <script>
-    let premiumUnlocked = false;
-
-    setTimeout(() => {
-      if (!premiumUnlocked) {
-        document.getElementById("search-bar").style.display = "none";
-        document.getElementById("results").style.display = "none";
-        document.getElementById("lock").style.display = "block";
-      }
-    }, 300000); // 5 minutes
-
-    async function fetchJobs() {
-      const searchTerm = document.getElementById('searchInput').value;
+    async function fetchJobs(term) {
+      const searchTerm = term || document.getElementById('searchInput').value;
       const resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = '<p>Loading jobs...</p>';
 
       const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(searchTerm)}&page=1&num_pages=1`;
+
       const options = {
         method: 'GET',
         headers: {
@@ -93,7 +148,7 @@
           card.innerHTML = `
             <h3>${job.job_title}</h3>
             <p><strong>Company:</strong> ${job.employer_name}</p>
-            <p><strong>Location:</strong> ${job.job_city}, ${job.job_country}</p>
+            <p><strong>Location:</strong> ${job.job_city || 'N/A'}, ${job.job_country || ''}</p>
             <p>${job.job_description.substring(0, 180)}...</p>
             <a href="${job.job_apply_link}" target="_blank">
               <button>Apply Now</button>
@@ -106,25 +161,10 @@
       }
     }
 
-    function payWithPaystack() {
-      let handler = PaystackPop.setup({
-        key: 'pk_test_0123456789abcdef0123456789abcdef01234567',
-        email: 'user@test.com',
-        amount: 35000,
-        currency: 'ZAR',
-        callback: function(response) {
-          premiumUnlocked = true;
-          document.getElementById("search-bar").style.display = "flex";
-          document.getElementById("results").style.display = "block";
-          document.getElementById("lock").style.display = "none";
-          alert("✅ Payment successful! Welcome back.");
-        },
-        onClose: function() {
-          alert('You closed the payment window. Please complete payment to unlock.');
-        }
-      });
-      handler.openIframe();
-    }
+    // Load default jobs
+    window.onload = () => {
+      fetchJobs('developer');
+    };
   </script>
 </body>
-</html>
+      </html>
