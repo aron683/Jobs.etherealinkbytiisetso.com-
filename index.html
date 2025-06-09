@@ -7,14 +7,14 @@
   <meta name="author" content="Tiisetso Mofokeng" />
   <meta name="keywords" content="JobSniper, job search, premium jobs, career, employment, South Africa, apply now, Tiisetso" />
 
-  <!-- 🌐 Open Graph -->
+  <!-- Open Graph -->
   <meta property="og:title" content="JobSniper X" />
   <meta property="og:description" content="Find premium jobs with one click. Built for fast hustlers. 🔥" />
   <meta property="og:image" content="logo.png" />
   <meta property="og:url" content="https://job.etherealinkbytiisetso.com" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- ✅ Google AdSense Script -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2681951363211497"
      crossorigin="anonymous"></script>
 
@@ -36,6 +36,26 @@
     .logo {
       height: 60px;
       margin-bottom: 10px;
+    }
+    .quote-box {
+      background: #fffbe6;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 2px solid #f1c40f;
+    }
+    .quote-box p {
+      font-style: italic;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .quote-box a {
+      background: #e67e22;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
     }
     .search-bar {
       display: flex;
@@ -101,26 +121,25 @@
   </style>
 </head>
 <body>
+
+  <!-- Motivational Quote -->
+  <div class="quote-box">
+    <p id="quoteText">Loading quote...</p>
+    <a href="https://tpi.li/6Pp" target="_blank">🔥 See Full Hustle Guide</a>
+  </div>
+
   <header>
     <img src="logo.png" alt="JobSniper Logo" class="logo" />
     <h1>JobSniper X</h1>
     <p>Sniping premium jobs for you – fast and smart</p>
   </header>
 
-  <!-- 🔍 Search Section -->
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search job title like developer, designer, security..." />
-    <button onclick="fetchJobs()">Search</button>
-  </div>
-
-  <!-- 💸 Monetized ShrinkMe CTA -->
+  <!-- ShrinkMe CTA -->
   <div class="referral-link">
-    <a href="https://tpi.li/6Pp" target="_blank">
-      🚀 Unlock Hidden Jobs Database – Tap Here
-    </a>
+    <a href="https://tpi.li/6Pp" target="_blank">🚀 Unlock Hidden Jobs Database – Tap Here</a>
   </div>
 
-  <!-- 📢 Google AdSense Banner Ad -->
+  <!-- Google Ad Banner -->
   <div class="ads-container">
     <ins class="adsbygoogle"
          style="display:block"
@@ -133,28 +152,41 @@
     </script>
   </div>
 
-  <!-- 🔽 Job Results -->
+  <!-- CareerJet Official Form -->
+  <div class="cjsearchform">
+    <script language="javascript" type="text/javascript" src="https://www.careerjet.co.za/partners/js_searchform.html?format=1&nfr=1&affid=b9cd05ff2684cddecbe302857d1e65f3"></script>
+  </div>
+
+  <!-- Job Results Area -->
   <div id="results"></div>
 
   <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X
   </footer>
 
-  <!-- 🔗 Final ShrinkMe Link -->
   <div class="referral-link">
-    <a href="https://tpi.li/6Pp" target="_blank">
-      💼 Premium Job Leads Shared by Recruiters – Click to Access
-    </a>
+    <a href="https://tpi.li/6Pp" target="_blank">💼 Premium Job Leads Shared by Recruiters – Click to Access</a>
   </div>
 
+  <!-- Scripts -->
   <script>
+    async function loadMotivationalQuote() {
+      try {
+        const res = await fetch("https://type.fit/api/quotes");
+        const quotes = await res.json();
+        const random = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById("quoteText").innerText = `"${random.text}" — ${random.author || "Unknown"}`;
+      } catch (e) {
+        document.getElementById("quoteText").innerText = "Stay hungry. Stay focused. Hustle hard.";
+      }
+    }
+
     async function fetchJobs(term) {
-      const searchTerm = term || document.getElementById('searchInput').value;
+      const searchTerm = term || 'developer';
       const resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = '<p>Loading jobs...</p>';
 
       const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(searchTerm)}&page=1&num_pages=1`;
-
       const options = {
         method: 'GET',
         headers: {
@@ -174,6 +206,8 @@
         }
 
         data.data.forEach(job => {
+          const affiliateUrl = `https://www.careerjet.com/jobsearch?search=${encodeURIComponent(searchTerm)}&partnerid=b9cd05ff2684cddecbe302857d1e65f3`;
+
           const card = document.createElement('div');
           card.className = 'job-card';
           card.innerHTML = `
@@ -181,14 +215,13 @@
             <p><strong>Company:</strong> ${job.employer_name}</p>
             <p><strong>Location:</strong> ${job.job_city || 'N/A'}, ${job.job_country || ''}</p>
             <p>${job.job_description.substring(0, 180)}...</p>
-            <a href="${job.job_apply_link}" target="_blank">
+            <a href="${affiliateUrl}" target="_blank">
               <button>Apply Now</button>
             </a>
           `;
           resultsDiv.appendChild(card);
         });
 
-        // 👇 Add extra CTA after results
         const more = document.createElement('div');
         more.className = "referral-link";
         more.innerHTML = `<a href="https://tpi.li/6Pp" target="_blank">🔥 Get the Secret Job List – Tap to View</a>`;
@@ -199,8 +232,8 @@
       }
     }
 
-    // Auto load with "developer" jobs on open
     window.onload = () => {
+      loadMotivationalQuote();
       fetchJobs('developer');
     };
   </script>
