@@ -28,7 +28,6 @@
     .testimonial-section { background:#fff; padding:40px 20px; text-align:center; border-top:1px solid #ccc; }
     .testimonial { max-width:600px; margin:20px auto; text-align:left; border-left:4px solid #009688; padding-left:15px; }
     .stars { color:gold; margin-bottom:5px; display:block; }
-    #toast { display:none; position:fixed; bottom:20px; left:10px; background:#009688; color:white; padding:10px 15px; border-radius:6px; font-size:13px; z-index:9999; }
   </style>
 </head>
 <body>
@@ -43,8 +42,6 @@
     <a href="https://tpi.li/6Pp" target="_blank">🚀 Unlock Hidden Jobs Database – Tap Here</a>
   </div>  <!-- 💡 Daily Motivation Tip -->  <div style="text-align:center; padding: 12px; margin: 10px auto; background: #f9f9f9; border-left: 4px solid #009688; max-width: 600px; font-size: 14px; color: #333;">
     💡 <strong>Job Hack:</strong> Register early on company websites after applying — it boosts your callback rate by up to 80%!
-  </div>  <!-- Live Visitor Widget -->  <div style="text-align:center; font-size:13px; color:#666; margin-top:10px;">
-    👁️ <strong>287</strong> users are browsing JobSniper X right now
   </div>  <div id="results"></div>  <!-- ⭐ Professional Ratings Section -->  <section class="testimonial-section">
     <h2>📢 Community Feedback</h2>
     <div class="testimonial">
@@ -58,15 +55,20 @@
     <p style="color:#777; font-size:13px; margin-top:20px;">* Ratings and reviews are verified and updated regularly for quality assurance.</p>
   </section>  <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X | SEO Optimized ✅
-  </footer>  <!-- Fake Apply Alert -->  <div id="toast">✅ Zanele just applied for “Remote Graphic Designer”</div>
-  <script>
-    setTimeout(() => {
-      document.getElementById('toast').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('toast').style.display = 'none';
-      }, 8000);
-    }, 3000);
-  </script>  <script>
+  </footer>  <div id="liveViewers" style="position:fixed; bottom:15px; left:15px; background:#004d40; color:white; padding:8px 14px; border-radius:6px; font-size:14px; box-shadow:0 2px 5px rgba(0,0,0,0.2); z-index:999;">
+    👁️ 132 people viewing now
+  </div>  <script>
+    let viewers = Math.floor(Math.random() * 70) + 80; // start between 80–150
+    const viewerBox = document.getElementById('liveViewers');
+
+    function updateViewers() {
+      if (viewers < 480) {
+        viewers += Math.floor(Math.random() * 10) + 3; // add 3–12
+        viewerBox.innerHTML = `👁️ ${viewers} people viewing now`;
+      }
+    }
+    setInterval(updateViewers, 10000);
+
     async function fetchJobs(term) {
       const searchTerm = term || document.getElementById('searchInput').value;
       const resultsDiv = document.getElementById('results');
@@ -93,7 +95,7 @@
         }
 
         data.data.forEach((job, index) => {
-          const isPremium = index % 3 === 0; // Hide wallet every 3rd job only
+          const isPremium = index % 3 === 0;
           const card = document.createElement('div');
           card.className = 'job-card';
           card.innerHTML = `
@@ -114,4 +116,4 @@
 
     window.onload = () => fetchJobs('developer');
   </script></body>
-</html>
+      </html>
