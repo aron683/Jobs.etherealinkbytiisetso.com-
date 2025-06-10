@@ -15,7 +15,8 @@
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
     header { background: #004d40; color:white; padding: 20px; text-align:center; }
-    .search-bar { display: flex; justify-content: center; margin: 20px; }
+    .logo { height:60px; margin-bottom:10px; }
+    .search-bar { display: flex; justify-content: center; margin:20px; }
     .search-bar input { padding: 10px; width: 60%; border-radius: 5px 0 0 5px; border: 1px solid #ccc; }
     .search-bar button { padding: 10px 20px; background: #009688; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
     .job-card { background:white; margin:20px auto; padding:20px; max-width:600px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
@@ -37,10 +38,12 @@
     <button onclick="fetchJobs()">Search</button>
   </div>  <div class="referral-link">
     <a href="https://tpi.li/6Pp" target="_blank">🚀 Unlock Hidden Jobs Database – Tap Here</a>
+  </div>  <!-- 💡 Daily Motivation / Tip -->  <div style="text-align:center; padding: 12px; margin: 10px auto; background: #f9f9f9; border-left: 4px solid #009688; max-width: 600px; font-size: 14px; color: #333;">
+    💡 <strong>Job Hack:</strong> Register early on company websites after applying — it boosts your callback rate by up to 80%!
   </div>  <div class="ads-container">
-    <!-- Fallback Wallet Monetization (you can replace with approved Google Ads later) -->
+    <!-- Temporary Wallet Monetization (you can replace with approved Google Ads later) -->
     <iframe src="https://flinkme.co/wallet/etherealink" width="90%" height="90" frameborder="0"></iframe>
-  </div>  <div id="results"></div>  <section style="background:#f9f9f9; padding: 40px 20px; text-align:center;">
+  </div>  <div id="results"></div>  <!-- 💬 User Testimonials Section -->  <section style="background:#f9f9f9; padding: 40px 20px; text-align:center;">
     <h2>💬 What People Are Saying</h2>
     <p style="font-size: 18px;">Rated <strong>4.8/5</strong> from over 1,200 job seekers</p>
     <div style="max-width:800px; margin:auto; text-align:left;">
@@ -51,7 +54,9 @@
     </div>
   </section>  <footer>
     Powered by Tiisetso 🧠 | © 2025 JobSniper X | Wallets: Flinkme / ShrinkMe / Careerjet | SEO Optimized ✅
-  </footer>  <script>
+  </footer>  <div class="referral-link">
+    <a href="https://tpi.li/6Pp" target="_blank">💼 Premium Job Leads Shared by Recruiters – Click to Access</a>
+  </div>  <script>
     async function fetchJobs(term) {
       const searchTerm = term || document.getElementById('searchInput').value;
       const resultsDiv = document.getElementById('results');
@@ -102,4 +107,4 @@
 
     window.onload = () => fetchJobs('developer');
   </script></body>
-      </html>
+  </html>
