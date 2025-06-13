@@ -1,119 +1,124 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <!-- Primary Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="JobSniper X - Find high-paying jobs instantly. Built for fast, smart hustlers by Tiisetso. Trusted by 1,200+ job seekers.">
-  <meta name="keywords" content="JobSniper, job search, jobs South Africa, career, employment, freelance, remote work, Tiisetso, high paying jobs" />
+  <title>JobSniper X | Find Premium Jobs in South Africa Instantly</title>
+  <meta name="title" content="JobSniper X | Find Premium Jobs in South Africa Instantly" />
+  <meta name="description" content="Search thousands of verified, high-paying jobs daily. Updated in real-time. Apply fast. Earn smart. Sniping premium jobs for South Africans and beyond." />
+  <meta name="keywords" content="jobs, south africa jobs, job search, online jobs, careerjet, gauteng jobs, free jobs, job board, remote jobs, apply for jobs" />
   <meta name="author" content="Tiisetso Mofokeng" />
-  <meta property="og:title" content="JobSniper X - Premium Job Finder" />
-  <meta property="og:description" content="Sniping jobs for you with AI precision. Tap in and win big!" />
-  <meta property="og:image" content="logo.png" />
-  <meta property="og:url" content="https://job.etherealinkbytiisetso.com" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="logo.png" />
-  <title>JobSniper X</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="en" />
+  <meta name="theme-color" content="#004440" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://job.etherealinkbytiisetso.com/" />
+  <meta property="og:title" content="JobSniper X | Find Premium Jobs in South Africa Instantly" />
+  <meta property="og:description" content="Find verified South African jobs instantly. Free search. Real-time updates. Fast apply system. Powered by Careerjet + monetized." />
+  <meta property="og:image" content="https://job.etherealinkbytiisetso.com/logo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://job.etherealinkbytiisetso.com/" />
+  <meta property="twitter:title" content="JobSniper X | Find Premium Jobs Fast" />
+  <meta property="twitter:description" content="Sniping real jobs daily with AI + affiliate power. Search, apply, earn." />
+  <meta property="twitter:image" content="https://job.etherealinkbytiisetso.com/logo.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://job.etherealinkbytiisetso.com/" />
+
+  <!-- Google Site Verification (optional) -->
+  <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->
+
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
-    header { background: #004d40; color:white; padding: 20px; text-align:center; }
-    .search-bar { display: flex; justify-content: center; margin: 20px; }
-    .search-bar input { padding: 10px; width: 60%; border-radius: 5px 0 0 5px; border: 1px solid #ccc; }
-    .search-bar button { padding: 10px 20px; background: #009688; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
-    .job-card { background:white; margin:20px auto; padding:20px; max-width:600px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-    .job-card h3 { color: #00796b; margin:0; }
-    .job-card p { margin:5px 0; }
-    .job-card button { padding:8px 15px; background:#00796b; color:white; border:none; border-radius:5px; margin-top:10px; }
-    .referral-link { text-align:center; margin:20px auto; }
-    .referral-link a { background:#009688; color:white; padding:12px 20px; text-decoration:none; border-radius:6px; font-weight:bold; display:inline-block; }
-    footer { text-align:center; padding:20px; background:#e0e0e0; font-size:14px; }
-    .testimonial-section { background:#fff; padding:40px 20px; text-align:center; border-top:1px solid #ccc; }
-    .testimonial { max-width:600px; margin:20px auto; text-align:left; border-left:4px solid #009688; padding-left:15px; }
-    .stars { color:gold; margin-bottom:5px; display:block; }
+    body { font-family: Arial; background: #f4f4f4; margin: 0; padding: 0; }
+    header, footer { background: #004440; color: white; padding: 20px; text-align: center; }
+    .search-bar { display: flex; justify-content: center; padding: 10px; flex-wrap: wrap; }
+    .search-bar input, .search-bar button { padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    .search-bar button { background: #009688; color: white; border: none; }
+    .job-card { background: #fff; margin: 10px; padding: 15px; border-left: 4px solid #009688; border-radius: 4px; }
+    .job-card a { color: #009688; text-decoration: none; font-weight: bold; }
+    footer small { font-size: 12px; color: #ccc; }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="JobSniper Logo" style="height:60px;" />
     <h1>JobSniper X</h1>
-    <p>Sniping premium jobs for you – fast and smart</p>
-  </header>  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search jobs like developer, designer..." />
-    <button onclick="fetchJobs()">Search</button>
-  </div>  <div class="referral-link">
-    <a href="https://tpi.li/6Pp" target="_blank">🚀 Unlock Hidden Jobs Database – Tap Here</a>
-  </div>  <!-- 💡 Daily Motivation Tip -->  <div style="text-align:center; padding: 12px; margin: 10px auto; background: #f9f9f9; border-left: 4px solid #009688; max-width: 600px; font-size: 14px; color: #333;">
-    💡 <strong>Job Hack:</strong> Register early on company websites after applying — it boosts your callback rate by up to 80%!
-  </div>  <div id="results"></div>  <!-- ⭐ Professional Ratings Section -->  <section class="testimonial-section">
-    <h2>📢 Community Feedback</h2>
-    <div class="testimonial">
-      <span class="stars">★★★★★</span>
-      <p><strong>Thandeka M. (Midrand)</strong><br/>“JobSniper X helped me land a remote internship in less than a week. Their premium listings are the real deal!”</p>
-    </div>
-    <div class="testimonial">
-      <span class="stars">★★★★☆</span>
-      <p><strong>Lebo K. (Polokwane)</strong><br/>“Clean layout, fresh listings daily. I’ve bookmarked it. Only wish more jobs were local but I still found gold.”</p>
-    </div>
-    <p style="color:#777; font-size:13px; margin-top:20px;">* Ratings and reviews are verified and updated regularly for quality assurance.</p>
-  </section>  <footer>
-    Powered by Tiisetso 🧠 | © 2025 JobSniper X | SEO Optimized ✅
-  </footer>  <div id="liveViewers" style="position:fixed; bottom:15px; left:15px; background:#004d40; color:white; padding:8px 14px; border-radius:6px; font-size:14px; box-shadow:0 2px 5px rgba(0,0,0,0.2); z-index:999;">
-    👁️ 132 people viewing now
-  </div>  <script>
-    let viewers = Math.floor(Math.random() * 70) + 80; // start between 80–150
-    const viewerBox = document.getElementById('liveViewers');
+    <p>Sniping premium jobs – smart, fast, and monetized!</p>
+  </header>
 
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search jobs like admin, driver, IT..." />
+    <button onclick="fetchCareerjetJobs()">Search</button>
+  </div>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <a href="https://shrinkme.ink/TGmiWcp" target="_blank">
+      🚀 Unlock Hidden Jobs Database – Tap Here
+    </a>
+  </div>
+
+  <div id="results" style="padding: 10px;"></div>
+
+  <footer>
+    👁️‍🗨️ <span id="liveViewers">100 people viewing now</span><br>
+    Powered by Tiisetso | © 2025 JobSniper X <br><small>Monetized via ShrinkMe + Careerjet</small>
+  </footer>
+
+  <script>
+    // Viewer booster logic
+    let viewers = Math.floor(Math.random() * 70) + 80;
+    const viewerBox = document.getElementById('liveViewers');
     function updateViewers() {
       if (viewers < 480) {
-        viewers += Math.floor(Math.random() * 10) + 3; // add 3–12
-        viewerBox.innerHTML = `👁️ ${viewers} people viewing now`;
+        viewers += Math.floor(Math.random() * 10) + 3;
+        viewerBox.textContent = viewers + " people viewing now";
       }
     }
     setInterval(updateViewers, 10000);
 
-    async function fetchJobs(term) {
-      const searchTerm = term || document.getElementById('searchInput').value;
+    // Careerjet job fetch
+    async function fetchCareerjetJobs() {
+      const keyword = document.getElementById('searchInput').value || "developer";
       const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '<p>Loading jobs...</p>';
+      resultsDiv.innerHTML = "🔄 Loading jobs from Careerjet...";
 
-      const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(searchTerm)}&page=1&num_pages=1`;
-
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': 'be05ad0d85mshe8a36833da7731ep19fffbjsne1c412115bbc',
-          'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
-        }
-      };
+      const url = `https://public.api.careerjet.net/search?locale_code=en_ZA&keywords=${encodeURIComponent(keyword)}&affid=34d916a60e2dcf8e625382b048946d9c`;
 
       try {
-        const response = await fetch(url, options);
-        const data = await response.json();
-        resultsDiv.innerHTML = '';
+        const res = await fetch(url);
+        const data = await res.json();
 
-        if (!data.data || data.data.length === 0) {
-          resultsDiv.innerHTML = '<p>No jobs found. Try another keyword.</p>';
+        if (!data.jobs || data.jobs.length === 0) {
+          resultsDiv.innerHTML = "❌ No jobs found.";
           return;
         }
 
-        data.data.forEach((job, index) => {
-          const isPremium = index % 3 === 0;
-          const card = document.createElement('div');
-          card.className = 'job-card';
-          card.innerHTML = `
-            <h3>${job.job_title}</h3>
-            <p><strong>Company:</strong> ${job.employer_name}</p>
-            <p><strong>Location:</strong> ${job.job_city || 'N/A'}, ${job.job_country || ''}</p>
-            <p>${job.job_description.substring(0, 180)}...</p>
-            <a href="${job.job_apply_link}" target="_blank"><button>Apply Now</button></a>
-            ${isPremium ? '<div style="margin-top:10px; text-align:center;"><a href="https://tpi.li/6Pp" target="_blank"><small>Premium Feature 🔒 Unlock Full Access</small></a></div>' : ''}
+        resultsDiv.innerHTML = "";
+        data.jobs.forEach((job, index) => {
+          const div = document.createElement("div");
+          div.className = "job-card";
+          div.innerHTML = `
+            <h3>${job.title}</h3>
+            <p><strong>Company:</strong> ${job.company}</p>
+            <p><strong>Location:</strong> ${job.locations}</p>
+            <p>${job.description}</p>
+            <a href="https://shrinkme.ink/TGmiWcp" target="_blank">🔓 Apply via Gateway</a>
           `;
-          resultsDiv.appendChild(card);
+          resultsDiv.appendChild(div);
         });
-
-      } catch (error) {
-        resultsDiv.innerHTML = '<p>Error loading jobs. Please try again later.</p>';
+      } catch (err) {
+        resultsDiv.innerHTML = "⚠️ Error fetching jobs.";
       }
     }
 
-    window.onload = () => fetchJobs('developer');
-  </script></body>
-      </html>
+    window.onload = fetchCareerjetJobs;
+  </script>
+</body>
+    </html>
