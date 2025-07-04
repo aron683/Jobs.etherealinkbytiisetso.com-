@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,34 +8,38 @@
   <style>
     body { font-family: Arial, sans-serif; background: #f4f4f4; margin:0; padding:0; }
     header, footer { background: #004440; color: white; text-align: center; padding: 20px; }
-    .search-bar { display:flex; justify-content:center; padding:10px; }
-    .search-bar input { padding:10px; width:60%; border-radius:5px; border:1px solid #ccc; }
-    .search-bar button { padding:10px; margin-left:5px; background:#004440; color:white; border:none; border-radius:5px; }
     #results { padding:10px; }
     .job-card { background:#fff; margin:10px 0; padding:15px; border-left:4px solid #004440; border-radius:4px; }
     .job-card a { color:#004440; text-decoration:none; font-weight:bold; }
     .job-card a:hover { text-decoration:underline; }
-    #liveViewers { position:fixed; bottom:15px; left:15px; background:#004440; color:white; padding:5px 10px; border-radius:5px; }#botBox { position:fixed; bottom:75px; right:15px; width:280px; background:#fff; border:2px solid #004440; border-radius:10px; box-shadow:0 0 10px #aaa; padding:10px; font-family:sans-serif; z-index:9999; }
-#chatLog { max-height:100px; overflow:auto; font-size:14px; margin-top:5px; }
-#chatInput { width:100%; margin-top:5px; padding:5px; border:1px solid #ccc; border-radius:5px; }
-#langBox { position:fixed; bottom:140px; right:20px; font-size:14px; z-index:9999; background:#fff; padding:5px; border-radius:5px; border:1px solid #ccc; }
+    #liveViewers { position:fixed; bottom:15px; left:15px; background:#004440; color:white; padding:5px 10px; border-radius:5px; }
 
+    #botBox { position:fixed; bottom:75px; right:15px; width:280px; background:#fff; border:2px solid #004440; border-radius:10px; box-shadow:0 0 10px #aaa; padding:10px; font-family:sans-serif; z-index:9999; }
+    #chatLog { max-height:100px; overflow:auto; font-size:14px; margin-top:5px; }
+    #chatInput { width:100%; margin-top:5px; padding:5px; border:1px solid #ccc; border-radius:5px; }
+    #langBox { position:fixed; bottom:140px; right:20px; font-size:14px; z-index:9999; background:#fff; padding:5px; border-radius:5px; border:1px solid #ccc; }
   </style>
 </head>
 <body>
 <header>
   <h1>JobSniper X</h1>
   <p>Sniping premium jobs – fast, mobile & AI smart!</p>
-</header><div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Search jobs like admin, driver, IT…">
-  <button onclick="fetchJobs()">Search</button>
-</div><div style="text-align:center; margin-top:10px;">
-  <a href="https://shrinkme.ink/TGmiWcp" target="_blank">💸 Unlock Premium Jobs Here</a>
-</div><div id="results"></div><footer>
+</header>
+
+<div style="text-align:center; margin-top:10px;">
+  <a href="https://shrinkme.ink/TGmiWcp" target="_blank">💎 Unlock Premium Jobs Here</a>
+</div>
+
+<div id="results"></div>
+
+<footer>
   <span id="liveViewers">100 people viewing now</span><br>
   Built by Tiisetso | © 2025 JobSniper X<br>
   Monetized via ShrinkMe & Powered by Local AI Bot
-</footer><div id="langBox">
+</footer>
+
+<!-- 🌐 Language Switch -->
+<div id="langBox">
   🌐 Language:
   <select id="langSelect">
     <option value="en">English</option>
@@ -43,43 +48,42 @@
     <option value="xh">Xhosa</option>
     <option value="af">Afrikaans</option>
   </select>
-</div><div id="botBox">
+</div>
+
+<!-- 🤖 JobBot Assistant -->
+<div id="botBox">
   <strong>💬 JobBot Assistant</strong>
   <div id="chatLog">Hi! Ask me how to apply, or search jobs.</div>
   <input type="text" id="chatInput" placeholder="Ask something..." onkeydown="if(event.key==='Enter') jobBot()">
-</div><script>
+</div>
+
+<script>
   const SHRINKME = "https://shrinkme.ink/TGmiWcp";
 
+  // Auto Job Loader
   async function fetchJobs() {
-    const term = document.getElementById("searchInput").value.trim().toLowerCase();
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "⏳ Loading jobs...";
     try {
-      const [arbeit, remotive] = await Promise.all([
-        fetch("https://www.arbeitnow.com/api/job-board-api").then(res => res.json()),
-        fetch("https://remotive.io/api/remote-jobs").then(res => res.json())
-      ]);
-      const jobs1 = arbeit.data || [];
-      const jobs2 = remotive.jobs || [];
-      const jobs = [...jobs1, ...jobs2];
-      const filtered = term ? jobs.filter(j => j.title?.toLowerCase().includes(term)) : jobs;
+      const res = await fetch("https://www.arbeitnow.com/api/job-board-api");
+      const data = await res.json();
+      const jobs = data.data || [];
 
-      if (filtered.length === 0) {
+      if (jobs.length === 0) {
         resultsDiv.innerHTML = "❌ No jobs found.";
         return;
       }
 
       resultsDiv.innerHTML = "";
-      filtered.slice(0, 20).forEach((job, i) => {
+      jobs.slice(0, 10).forEach((job, i) => {
         const premium = i % 3 === 0 ? `✅ PREMIUM – <a href="${SHRINKME}" target="_blank">Unlock</a>` : "FREE";
         resultsDiv.innerHTML += `
           <div class="job-card">
             <h3>${job.title}</h3>
-            <p><strong>Company:</strong> ${job.company_name || job.company}</p>
-            <p><strong>Location:</strong> ${job.location || job.candidate_required_location || 'Remote'}</p>
+            <p><strong>Company:</strong> ${job.company_name}</p>
+            <p><strong>Location:</strong> ${job.location}</p>
             <p><strong>Level:</strong> ${premium}</p>
-            <a href="${job.url || job.url_apply}" target="_blank">Apply Now</a>
-            <br><button onclick="autoApply('${job.title}', '${job.company_name || job.company}')">🤖 Auto Apply</button>
+            <a href="${job.url}" target="_blank">Apply Now</a>
           </div>
         `;
       });
@@ -88,26 +92,60 @@
     }
   }
 
-  function autoApply(title, company) {
-    alert(`Auto-applying to '${title}' at ${company}...\n\n✅ Resume Sent.\nWe'll email you updates.`);
-  }
-
+  // Viewers Counter
   let viewers = Math.floor(Math.random() * 50) + 100;
   setInterval(() => {
     viewers += Math.floor(Math.random() * 4);
     document.getElementById("liveViewers").textContent = viewers + " people viewing now";
   }, 8000);
 
+  // Multilingual JobBot
   function jobBot() {
     const user = document.getElementById("chatInput").value.toLowerCase();
     const log = document.getElementById("chatLog");
     const lang = document.getElementById("langSelect").value;
+
     const t = {
-      en: { apply: "📝 Tap 'Apply Now' or 'Auto Apply' next to the job.", driver: "🚗 Try searching for 'driver' using the search bar.", help: "💬 I'm here to guide you! Try asking 'how do I apply?'", premium: "🔓 Premium jobs need you to click the unlock link.", contact: "📧 Contact: Etherealinkbytiisetso@gmail.com", default: "🤖 Ask me about jobs, applying, or support." },
-      zu: { apply: "📝 Chofoza 'Apply Now' ukuze ufake isicelo.", driver: "🔎 Sesha 'driver' kubha engenhla.", help: "👋 Ngikhona ukukusiza. Buza 'ngifaka kanjani isicelo?'", premium: "🔓 Imisebenzi ye-premium idinga isixhumanisi.", contact: "📩 Xhumana: Etherealinkbytiisetso@gmail.com", default: "🤖 Buza mayelana nemisebenzi noma isicelo." },
-      st: { apply: "📝 Tobetsa 'Apply Now' ho etsa kopo.", driver: "🔎 Batla 'driver' lebokoseng.", help: "👋 Ke teng ho thusa. Botsa 'ke etsa kopo joang?'", premium: "🔓 Mesebetsi ea premium e hloka sehokelo.", contact: "📩 Iteanye: Etherealinkbytiisetso@gmail.com", default: "🤖 Botsa ka mesebetsi kapa ts'ehetso." },
-      xh: { apply: "📝 Cofa 'Apply Now' ukuze ufake isicelo.", driver: "🔎 Khangela 'driver' kwi search bar.", help: "👋 Ndilapha ukukunceda. Buza 'ndifaka njani isicelo?'", premium: "🔓 Imisebenzi ye-premium ifuna ikhonkco.", contact: "📩 Qhagamshelana: Etherealinkbytiisetso@gmail.com", default: "🤖 Buza ngemisebenzi, isicelo okanye uncedo." },
-      af: { apply: "📝 Klik 'Apply Now' om aansoek te doen.", driver: "🔎 Soek vir 'driver' in die soekveld.", help: "👋 Ek is hier om te help. Vra 'hoe doen ek aansoek?'", premium: "🔓 Premium poste moet ontsluit word.", contact: "📩 Kontak: Etherealinkbytiisetso@gmail.com", default: "🤖 Vra oor werksgeleenthede of aansoeke." }
+      en: {
+        apply: "📝 Tap 'Apply Now' under the job you want.",
+        driver: "🔎 Try scrolling below to find driver jobs.",
+        help: "👋 I'm here to help you apply. Try 'how do I apply?'",
+        premium: "🔓 Premium jobs require unlock link.",
+        contact: "📩 Contact: jobs@etherealink.com",
+        default: "🤖 Try asking about jobs, applying, or contact."
+      },
+      zu: {
+        apply: "📝 Chofoza 'Apply Now' ukuze ufake isicelo.",
+        driver: "🔎 Sesha izikhundla ezifanele ezansi.",
+        help: "👋 Ngikhona ukukusiza. Buza 'ngifaka kanjani isicelo?'",
+        premium: "🔓 Imisebenzi ye-premium idinga isixhumanisi.",
+        contact: "📩 Xhumana: jobs@etherealink.com",
+        default: "🤖 Buza mayelana nemisebenzi noma isicelo."
+      },
+      st: {
+        apply: "📝 Tobetsa 'Apply Now' ho etsa kopo.",
+        driver: "🔎 Batla mesebetsi e loketseng ka tlase.",
+        help: "👋 Ke teng ho thusa. Botsa 'ke etsa kopo joang?'",
+        premium: "🔓 Mesebetsi ea premium e hloka sehokelo.",
+        contact: "📩 Iteanye: jobs@etherealink.com",
+        default: "🤖 Botsa ka mesebetsi kapa ts'ehetso."
+      },
+      xh: {
+        apply: "📝 Cofa 'Apply Now' ukuze ufake isicelo.",
+        driver: "🔎 Jonga ezantsi imisebenzi yezemoto.",
+        help: "👋 Ndilapha ukukunceda. Buza 'ndifaka njani isicelo?'",
+        premium: "🔓 Imisebenzi ye-premium ifuna ikhonkco.",
+        contact: "📩 Qhagamshelana: jobs@etherealink.com",
+        default: "🤖 Buza ngemisebenzi, isicelo okanye uncedo."
+      },
+      af: {
+        apply: "📝 Klik 'Apply Now' om aansoek te doen.",
+        driver: "🔎 Kyk onder vir bestuurder poste.",
+        help: "👋 Ek is hier om te help. Vra 'hoe doen ek aansoek?'",
+        premium: "🔓 Premium poste moet ontsluit word.",
+        contact: "📩 Kontak: jobs@etherealink.com",
+        default: "🤖 Vra oor werksgeleenthede of aansoeke."
+      }
     };
 
     const replies = t[lang] || t.en;
@@ -123,6 +161,8 @@
     log.scrollTop = log.scrollHeight;
   }
 
+  // Auto load jobs
   fetchJobs();
-</script></body>
-      </html>
+</script>
+</body>
+  </html>
